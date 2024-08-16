@@ -9,8 +9,8 @@ class CourseSerializer(serializers.ModelSerializer):
     lessons_amount_in_course = serializers.SerializerMethodField()
 
     def get_lessons_amount_in_course(self, obj):
-        if obj.lesson_set.all().count:
-            return obj.lesson_set.all().count.lesson
+        if obj.lesson_set.all().count():
+            return obj.lesson_set.all().count()
         else:
             return 0
 
