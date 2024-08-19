@@ -23,6 +23,9 @@ class Course(models.Model):
         verbose_name = "Курс"
         verbose_name_plural = "Курсы"
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Lesson(models.Model):
     course = models.ForeignKey(
@@ -59,3 +62,6 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = "Урок"
         verbose_name_plural = "Уроки"
+
+    def __str__(self):
+        return f"{self.name}"
