@@ -1,5 +1,5 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from materials.models import Course, Lesson
 

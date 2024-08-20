@@ -54,13 +54,33 @@ class Payments(models.Model):
         blank=True,
         null=True,
     )
-    payment_date = models.DateTimeField(default=now, verbose_name='Дата оплаты', blank=True, null=True)
-    course = models.ForeignKey(Course, verbose_name='Оплаченный курс', on_delete=models.CASCADE, blank=True, null=True)
-    lesson = models.ForeignKey(Lesson, verbose_name='Оплаченный урок', on_delete=models.CASCADE, blank=True, null=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Сумма оплаты')
-    payment_type = models.CharField(max_length=50, verbose_name='Способ оплаты', default='Перевод на счет',
-                                    choices=payment_choices)
+    payment_date = models.DateTimeField(
+        default=now, verbose_name="Дата оплаты", blank=True, null=True
+    )
+    course = models.ForeignKey(
+        Course,
+        verbose_name="Оплаченный курс",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+    lesson = models.ForeignKey(
+        Lesson,
+        verbose_name="Оплаченный урок",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+    amount = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name="Сумма оплаты"
+    )
+    payment_type = models.CharField(
+        max_length=50,
+        verbose_name="Способ оплаты",
+        default="Перевод на счет",
+        choices=payment_choices,
+    )
 
     class Meta:
-        verbose_name = 'Платеж'
-        verbose_name_plural = 'Платежи'
+        verbose_name = "Платеж"
+        verbose_name_plural = "Платежи"
