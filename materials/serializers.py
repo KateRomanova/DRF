@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
-from materials.models import Course, Lesson
+from materials.models import Course, Lesson, Subscription
+from materials.validators import validate_url
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -23,7 +24,15 @@ class CourseSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class LessonSerializer(ModelSerializer):
+class LessonSerializer(serializers.ModelSerializer):
+    video_url = serializers.CharField(validators=[validate_url])
+
     class Meta:
         model = Lesson
         fields = "__all__"
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = '__all__'
