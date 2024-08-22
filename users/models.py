@@ -74,8 +74,7 @@ class Payments(models.Model):
         blank=True,
         null=True,
     )
-    amount = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name="Стоимость курса", help_text="Укажите стоимость курса"
+    amount = models.PositiveIntegerField(verbose_name="Стоимость курса", help_text="Укажите стоимость курса"
     )
     payment_type = models.CharField(
         max_length=50,
