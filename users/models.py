@@ -45,6 +45,9 @@ class User(AbstractUser):
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
 
+    def __str__(self):
+        return self.email
+
 
 class Payments(models.Model):
     user = models.ForeignKey(
@@ -59,20 +62,20 @@ class Payments(models.Model):
     )
     course = models.ForeignKey(
         Course,
-        verbose_name="Оплаченный курс",
+        verbose_name="Курс",
         on_delete=models.CASCADE,
         blank=True,
         null=True,
     )
     lesson = models.ForeignKey(
         Lesson,
-        verbose_name="Оплаченный урок",
+        verbose_name="Урок",
         on_delete=models.CASCADE,
         blank=True,
         null=True,
     )
     amount = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name="Сумма оплаты"
+        max_digits=10, decimal_places=2, verbose_name="Стоимость курса", help_text="Укажите стоимость курса"
     )
     payment_type = models.CharField(
         max_length=50,
@@ -80,7 +83,24 @@ class Payments(models.Model):
         default="Перевод на счет",
         choices=payment_choices,
     )
+    session_id = models.CharField(
+        max_length=250,
+        verbose_name="ID сессии",
+        blank=True,
+        null=True,
+        help_text="Укажите ID сессии",
+    )
+    payment_link = models.URLField(
+        max_length=400,
+        blank=True,
+        null=True,
+        verbose_name="Ссылка на оплату",
+        help_text="Укажите ссылку на оплату",
+    )
 
     class Meta:
         verbose_name = "Платеж"
         verbose_name_plural = "Платежи"
+
+    def __str__(self):
+        return self.amount

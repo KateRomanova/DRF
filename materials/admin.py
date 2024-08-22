@@ -15,4 +15,3 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "description", "course", "preview_image", "video_url")
     list_filter = ("id", "course", "name")
     search_fields = ("id", "course__name", "name")
-
