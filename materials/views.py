@@ -1,3 +1,7 @@
+from datetime import timedelta
+
+from django.utils import timezone
+
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.generics import (
@@ -20,6 +24,7 @@ from materials.serializers import (
     SubscriptionSerializer,
 )
 from users.permissions import IsModerator, IsOwner
+from materials.tasks import start_mailshot
 
 
 class CourseViewSet(ModelViewSet):
@@ -30,6 +35,11 @@ class CourseViewSet(ModelViewSet):
     def perform_create(self, serializer):
         course = serializer.save()
         course.owner = self.request.user
+        course.save()
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        start_mailshot.delay(course)
         course.save()
 
     def get_permissions(self):
