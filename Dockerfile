@@ -12,4 +12,4 @@ RUN pip install poetry && \
 
 COPY . .
 
-CMD ['sh', '-c', 'python3', 'manage.py', 'migrate', 'python', 'manage.py', 'runserver']
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver"]
